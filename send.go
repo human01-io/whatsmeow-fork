@@ -1011,7 +1011,9 @@ func getButtonTypeFromMessage(msg *waE2E.Message) string {
 	case msg.ListResponseMessage != nil:
 		return "list_response"
 	case msg.InteractiveResponseMessage != nil:
-		return "interactive_response"
+		// Native flow responses do not get a <biz> wrapper in the official client.
+		// Returning "" here causes the wrapper to be skipped.
+		return ""
 	default:
 		return ""
 	}
